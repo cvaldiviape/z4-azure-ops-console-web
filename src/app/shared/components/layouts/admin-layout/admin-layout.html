@@ -1,0 +1,22 @@
+<div class="admin-layout">
+  <app-sidebar
+    [openSidebar]="openSidebar()"
+    [sizeDisplay]="sizeDisplay()"
+    [appName]="appName"
+    [username]="username"
+    [items]="items"
+    (navigated)="closeSidebarOnlyMobile()"
+  />
+
+  @if (isMobile() && openSidebar()) {
+    <div class="admin-layout__backdrop" (click)="closeSidebarOnlyMobile()"></div>
+  }
+
+  <div class="admin-layout__content">
+    <app-navbar [openSidebar]="openSidebar()" (toggleSidebar)="toggleSidebar()" (logout)="logout()" />
+
+    <main class="admin-layout__main">
+      <router-outlet />
+    </main>
+  </div>
+</div>

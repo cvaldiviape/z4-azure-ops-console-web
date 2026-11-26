@@ -1,0 +1,70 @@
+<section class="saga-detail">
+  <nav class="saga-detail__breadcrumb">
+    <a routerLink="/admin/saga/list">Sagas</a>
+    <span>/</span>
+    <span>Pedido {{ orderId() }}</span>
+  </nav>
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (notFound()) {
+    <div class="saga-detail__card saga-detail__empty">No existe una Saga para el pedido {{ orderId() }}.</div>
+  }
+
+  @if (detail(); as sagaDetail) {
+    <div class="row saga-detail__summary">
+      <div class="col-12 sm:col-6 lg:col-3">
+        <div class="saga-detail__metric">
+          <span class="saga-detail__metric-label">Pedido</span>
+          <span class="status status--{{ orderStatusTone[sagaDetail.saga.orderStatus] }}">{{ sagaDetail.saga.orderStatus }}</span>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 lg:col-3">
+        <div class="saga-detail__metric">
+          <span class="saga-detail__metric-label">Saga</span>
+          <span class="status status--{{ sagaStatusTone[sagaDetail.saga.sagaStatus] }}">{{ sagaDetail.saga.sagaStatus }}</span>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 lg:col-3">
+        <div class="saga-detail__metric">
+          <span class="saga-detail__metric-label">Duración</span>
+          <span class="saga-detail__metric-value">
+            @if (durationInSeconds(); as seconds) {
+              {{ seconds.toFixed(1) }} s
+            } @else {
+              —
+            }
+          </span>
+        </div>
+      </div>
+      <div class="col-12 sm:col-6 lg:col-3">
+        <div class="saga-detail__metric">
+          <span class="saga-detail__metric-label">Creada</span>
+          <span class="saga-detail__metric-value">{{ sagaDetail.saga.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="saga-detail__card">
+      <header class="saga-detail__card-header">
+        <h2>Línea de tiempo</h2>
+        <span class="mono saga-detail__correlation">{{ sagaDetail.saga.correlationId }}</span>
+      </header>
+
+      <app-saga-timeline [timeline]="sagaDetail.timeline" />
+
+      <footer class="saga-detail__actions">
+        <a mat-stroked-button [href]="grafanaUrl()" target="_blank" rel="noopener">
+          <mat-icon>monitoring</mat-icon>
+          Ver logs en Grafana
+        </a>
+        <button mat-stroked-button type="button" (click)="copyCorrelationId()">
+          <mat-icon>content_copy</mat-icon>
+          Copiar correlationId
+        </button>
+      </footer>
+    </div>
+  }
+</section>

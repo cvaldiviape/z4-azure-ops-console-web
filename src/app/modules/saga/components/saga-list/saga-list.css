@@ -1,0 +1,38 @@
+.saga-list__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.saga-list__filter {
+  width: 14rem;
+}
+
+.saga-list__card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.saga-list__table {
+  width: 100%;
+}
+
+.saga-list__link {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.saga-list__link:hover {
+  text-decoration: underline;
+}
+
+.saga-list__empty {
+  padding: var(--space-lg);
+  text-align: center;
+  color: var(--color-text-secondary);
+}

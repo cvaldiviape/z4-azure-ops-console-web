@@ -1,0 +1,30 @@
+<header class="navbar">
+  <button
+    mat-icon-button
+    type="button"
+    [attr.aria-label]="openSidebar() ? 'Cerrar menú' : 'Abrir menú'"
+    (click)="toggleSidebar.emit()"
+  >
+    <mat-icon>{{ openSidebar() ? 'menu_open' : 'menu' }}</mat-icon>
+  </button>
+
+  <form class="navbar__search" (ngSubmit)="searchOrder()">
+    <mat-icon class="navbar__search-icon">search</mat-icon>
+    <input
+      class="navbar__search-input"
+      name="orderId"
+      inputmode="numeric"
+      placeholder="Buscar pedido por id"
+      [(ngModel)]="orderId"
+    />
+  </form>
+
+  <div class="navbar__actions">
+    <a mat-icon-button [href]="grafanaUrl" target="_blank" rel="noopener" matTooltip="Abrir Grafana" aria-label="Abrir Grafana">
+      <mat-icon>monitoring</mat-icon>
+    </a>
+    <button mat-icon-button type="button" matTooltip="Cerrar sesión" aria-label="Cerrar sesión" (click)="logout.emit()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</header>

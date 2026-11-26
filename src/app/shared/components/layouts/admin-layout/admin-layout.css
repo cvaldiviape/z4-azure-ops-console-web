@@ -1,0 +1,25 @@
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-layout__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.admin-layout__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-layout__main {
+  flex: 1;
+  padding: var(--space-lg);
+  overflow-y: auto;
+}

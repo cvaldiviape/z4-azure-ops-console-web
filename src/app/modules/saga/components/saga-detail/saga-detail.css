@@ -1,0 +1,79 @@
+.saga-detail__breadcrumb {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.saga-detail__breadcrumb a {
+  color: var(--color-primary);
+}
+
+/* grid.css agrega padding en .row; aquí se compensa para alinear con la tarjeta */
+.saga-detail__summary {
+  margin: 0 calc(var(--space-xs) * -1) var(--space-md);
+  padding: 0;
+}
+
+.saga-detail__summary > [class*='col-'] {
+  padding: var(--space-xs);
+}
+
+.saga-detail__metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.saga-detail__metric-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.saga-detail__metric-value {
+  font-weight: 500;
+}
+
+.saga-detail__card {
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.saga-detail__card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.saga-detail__card-header h2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.saga-detail__correlation {
+  color: var(--color-text-muted);
+}
+
+.saga-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.saga-detail__empty {
+  color: var(--color-text-secondary);
+}

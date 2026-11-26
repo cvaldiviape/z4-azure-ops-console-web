@@ -1,0 +1,6 @@
+/* Estilos globales: el orden importa (variables primero). Cada componente tiene su propio .css. */
+@import './styles/variables.css';
+@import './styles/base.css';
+@import './styles/grid.css';
+@import './styles/status.css';
+@import './styles/material.css';

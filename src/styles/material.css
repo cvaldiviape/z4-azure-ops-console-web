@@ -1,0 +1,23 @@
+/* Ajustes de Angular Material para que use los colores de la consola. */
+.mat-mdc-snack-bar-container.snackbar-info {
+  --mat-snack-bar-container-color: var(--color-info);
+  --mat-snack-bar-supporting-text-color: #ffffff;
+}
+
+.mat-mdc-snack-bar-container.snackbar-warning {
+  --mat-snack-bar-container-color: var(--color-warning);
+  --mat-snack-bar-supporting-text-color: #ffffff;
+}
+
+.mat-mdc-snack-bar-container.snackbar-error {
+  --mat-snack-bar-container-color: var(--color-danger);
+  --mat-snack-bar-supporting-text-color: #ffffff;
+}
+
+.mat-mdc-table {
+  --mat-table-background-color: var(--color-surface);
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}

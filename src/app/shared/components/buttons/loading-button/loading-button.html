@@ -1,0 +1,8 @@
+<button class="loading-button" [type]="type()" [disabled]="disabled() || loading()">
+  @if (loading()) {
+    <span class="loading-button__spinner" aria-hidden="true"></span>
+    <span>{{ loadingText() }}</span>
+  } @else {
+    <span>{{ text() }}</span>
+  }
+</button>

@@ -1,0 +1,72 @@
+<section class="saga-list">
+  <header class="saga-list__header">
+    <h1>{{ title() }}</h1>
+
+    <mat-form-field class="saga-list__filter" appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Estado de la Saga</mat-label>
+      <mat-select [value]="status() ?? null" (selectionChange)="onStatusChange($event.value)">
+        <mat-option [value]="null">Todos</mat-option>
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </header>
+
+  <div class="saga-list__card">
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <table mat-table [dataSource]="sagas()" class="saga-list__table">
+      <ng-container matColumnDef="orderId">
+        <th mat-header-cell *matHeaderCellDef>Pedido</th>
+        <td mat-cell *matCellDef="let saga">
+          <a class="saga-list__link" [routerLink]="['/admin/saga/detail', saga.orderId]">#{{ saga.orderId }}</a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sagaStatus">
+        <th mat-header-cell *matHeaderCellDef>Saga</th>
+        <td mat-cell *matCellDef="let saga">
+          <span class="status status--{{ sagaTone(saga.sagaStatus) }}">{{ saga.sagaStatus }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orderStatus">
+        <th mat-header-cell *matHeaderCellDef>Pedido</th>
+        <td mat-cell *matCellDef="let saga">
+          <span class="status status--{{ orderTone(saga.orderStatus) }}">{{ saga.orderStatus }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="currentStep">
+        <th mat-header-cell *matHeaderCellDef>Último paso</th>
+        <td mat-cell *matCellDef="let saga" class="mono">{{ saga.currentStep }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Creada</th>
+        <td mat-cell *matCellDef="let saga">{{ saga.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="saga-list__empty" [attr.colspan]="displayedColumns.length">
+          @if (!loading()) {
+            No hay Sagas con este filtro.
+          }
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalElements()"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex()"
+      [hidePageSize]="true"
+      (page)="onPageChange($event)"
+    />
+  </div>
+</section>

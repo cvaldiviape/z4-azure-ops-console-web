@@ -1,0 +1,24 @@
+<ol class="saga-timeline">
+  @for (step of timeline(); track step.eventId; let last = $last) {
+    <li class="saga-timeline__step" [class.saga-timeline__step--last]="last">
+      <span class="saga-timeline__dot saga-timeline__dot--{{ sagaStatusTone[step.sagaStatus] }}"></span>
+
+      <div class="saga-timeline__body">
+        <div class="saga-timeline__head">
+          <span class="saga-timeline__event">{{ step.eventType }}</span>
+          <span class="status status--{{ sagaStatusTone[step.sagaStatus] }}">{{ step.sagaStatus }}</span>
+          <span class="saga-timeline__order-status">Pedido {{ step.orderStatus }}</span>
+        </div>
+        <div class="saga-timeline__meta">
+          <span class="mono">{{ step.createdAt | date: 'HH:mm:ss.SSS' }}</span>
+          <span class="mono">{{ step.eventId }}</span>
+        </div>
+        @if (step.errorMessage) {
+          <p class="saga-timeline__error">{{ step.errorMessage }}</p>
+        }
+      </div>
+    </li>
+  } @empty {
+    <li class="saga-timeline__empty">La Saga todavía no tiene pasos registrados.</li>
+  }
+</ol>

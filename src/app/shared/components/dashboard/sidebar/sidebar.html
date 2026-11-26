@@ -1,0 +1,65 @@
+<aside
+  class="sidebar"
+  [class.sidebar--mobile]="isMobile()"
+  [class.sidebar--open]="openSidebar()"
+  [class.sidebar--collapsed]="!openSidebar() && !isMobile()"
+>
+  <div class="sidebar__brand">
+    <mat-icon class="sidebar__brand-icon">terminal</mat-icon>
+    <span class="sidebar__label sidebar__brand-name">{{ appName() }}</span>
+  </div>
+
+  <div class="sidebar__profile">
+    <mat-icon class="sidebar__icon">account_circle</mat-icon>
+    <span class="sidebar__label sidebar__username">{{ username() }}</span>
+  </div>
+
+  <nav class="sidebar__menu">
+    <ul>
+      @for (item of items(); track item.title) {
+        <li>
+          @if (item.path) {
+            <a
+              class="sidebar__item"
+              [routerLink]="item.path"
+              routerLinkActive="sidebar__item--active"
+              (click)="navigated.emit()"
+            >
+              <mat-icon class="sidebar__icon">{{ item.icon }}</mat-icon>
+              <span class="sidebar__label">{{ item.title }}</span>
+            </a>
+          } @else {
+            <button
+              type="button"
+              class="sidebar__item"
+              [class.sidebar__item--open]="isSubMenuOpen(item.title)"
+              (click)="toggleSubMenu(item.title)"
+            >
+              <mat-icon class="sidebar__icon">{{ item.icon }}</mat-icon>
+              <span class="sidebar__label">{{ item.title }}</span>
+              <mat-icon class="sidebar__label sidebar__chevron">chevron_right</mat-icon>
+            </button>
+
+            <ul class="sidebar__submenu" [class.sidebar__submenu--open]="isSubMenuOpen(item.title)">
+              @for (subItem of item.subMenu; track subItem.subTitle) {
+                <li>
+                  <a
+                    class="sidebar__subitem"
+                    [routerLink]="subItem.path"
+                    [queryParams]="subItem.queryParams ?? {}"
+                    routerLinkActive="sidebar__subitem--active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="navigated.emit()"
+                  >
+                    <mat-icon class="sidebar__subicon">{{ subItem.subIcon }}</mat-icon>
+                    <span>{{ subItem.subTitle }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+</aside>
